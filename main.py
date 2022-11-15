@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 #run webpage from this file
 #open via http://127.0.0.1:5000
+#Michelle is running on: Python 3.10.8 & 
 
 app = create_app()
 

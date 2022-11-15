@@ -1,8 +1,9 @@
+<!--Application Submission page, errors are handled via base.html and auth.py-->
 {% extends "base.html" %}
 {% block title %}J.M.C Smart Scholarship{% endblock %}
 
 {% block content %}
-<form method="POST">
+<form method="POST"> <!--Method can change based on 'logging in' or 'signing up'-->
     <h3 align = "center">Student Application Form </h3>
 <div class="form-group">
     <label for = "ID">Student ID</label>

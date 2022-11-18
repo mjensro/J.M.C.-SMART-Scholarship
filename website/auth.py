@@ -22,7 +22,7 @@ def create_application():
         db.session.add(new_applicant)# add a new user,etc.
         db.session.commit() #commit changes to db, update file
         flash('Application Submitted', category='success')
-        return redirect(url_for(auth.student))#auth.Applicant)) #forward to next page with student GPA,etc
+        return redirect(url_for('views.home'))#'auth.student' = forward to next page with student GPA,etc. from Applicant Database
 
        #if no Student Number match:
        #  flash('No Student Number Match – please reenter data', category = 'error')

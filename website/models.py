@@ -15,6 +15,7 @@ class Registrar(db.Model, UserMixin):
     pNum = db.Column(db.String(11))
     zip = db.Column(db.String(5))
     dob = db.Column(db.String(10))
+    #notes = db.relationship('Applicant')
 #can prepopulate all data
 
 #applicant data store
@@ -26,7 +27,7 @@ class Applicant(db.Model):
     creditHrs = db.Column(db.Integer)
     semGPA=db.Column(db.Float(5)) #semester GPA
     date = db.Column(db.DateTime(timezone=True),default=func.now)#stores current date&time for application being submitted
-    user_id = db.Column(db.Integer, db.ForeignKey('registrar.id'))
+    #user_id = db.Column(db.Integer, db.ForeignKey('Registrar.id'))
 #can prepopulate some data
 
 #class Accounting

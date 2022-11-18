@@ -24,11 +24,11 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link" id="Home" href ='/'>Home</a>
             <a class="nav-item nav-link" id="create-application" href ='/create-application'>Create Application</a>
-            <!--Create pages/htmls as needed-->
+            <!--Create extra pages/htmls as needed-->
         </div>
     </div>
 </nav>
-
+<!--"Error/Success Message Flashing Format"-->
 {% with messages = get_flashed_messages(with_categories = true) %}
 {% if messages %}
     {% for category, message in messages %}

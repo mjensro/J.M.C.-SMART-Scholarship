@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
+# from . import models
 
 db=SQLAlchemy()
 DB_NAME = "database.db"
@@ -8,9 +9,13 @@ DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'a'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://///C:/flasker/J.M.C.-SMART-Scholarship/website/database.db'#f'sqlite:///{DB_NAME}'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-    db=SQLAlchemy(app)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
+    #'sqlite://///C:/flasker/J.M.C.-SMART-Scholarship/website/database.db' for windows setup
+    #'sqlite:///////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
+    #'sqlite:///////website/database.db'
+    #'f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
+   # db=SQLAlchemy()
     db.init_app(app)
 
     from .views import views
@@ -32,7 +37,7 @@ def create_app():
       # db.create_all(app=app)
     print('Database Created')'''
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
+    if not path.exists('C:/flasker/J.M.C.-SMART-Scholarship/website/' + DB_NAME):
         with app.app_context():
             db.create_all()
             print('Created Database!')

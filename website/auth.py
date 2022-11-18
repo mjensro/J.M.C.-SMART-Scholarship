@@ -1,5 +1,8 @@
 #Used to navigate to other pages
-from flask import Blueprint,render_template,request,flash
+from flask import Blueprint,render_template,request,flash,redirect,url_for
+from .models import Registrar,Applicant
+from flask_login import login_user, login_required, logout_user, current_user
+from . import db
 
 auth = Blueprint('auth',__name__) #blueprint for flask
 #submit = post request
@@ -13,6 +16,13 @@ def create_application():
         pNum = request.form.get('pNum')
         zip = request.form.get('zip')
         dob = request.form.get('dob')
+
+    #code is currently set up to create application inputs as "new users", its not looking for pre-existing IDs yet
+        new_applicant = Registrar(email=email,fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
+        db.session.add(new_applicant)# add a new user,etc.
+        db.session.commit() #commit changes to db, update file
+        flash('Application Submitted', category='success')
+        return redirect(url_for(auth.student))#auth.Applicant)) #forward to next page with student GPA,etc
 
        #if no Student Number match:
        #  flash('No Student Number Match – please reenter data', category = 'error')
@@ -32,6 +42,10 @@ def create_application():
 
 #http://127.0.0.1:5000/student/Michelle
 @auth.route('/student/<name>',methods = ['GET', 'POST', 'UPDATE'])
-def student(name):
-    return render_template("student.html", user_name=name) #passing name from def
+def student(new_applicant):
+    return render_template("student.html")#, name=new_applicant.fName) #passing name from def
     #return "<h1>Welcome {}!</h1>".format(name)
+
+
+    #db.session.add() add a new user,etc.
+    #db.session.commit() commit changes to db, update file

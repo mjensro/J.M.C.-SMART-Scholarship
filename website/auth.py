@@ -22,7 +22,7 @@ def create_application():
         db.session.add(new_applicant)# add a new user,etc.
         db.session.commit() #commit changes to db, update file
         flash('Application Submitted', category='success')
-        return redirect(url_for('views.home'))#'auth.student' = forward to next page with student GPA,etc. from Applicant Database
+        return redirect(url_for('auth.student'))#'views.home' = forward to next page with student GPA,etc. from Applicant Database
 
        #if no Student Number match:
        #  flash('No Student Number Match – please reenter data', category = 'error')
@@ -41,9 +41,11 @@ def create_application():
     return render_template("appform.html")
 
 #http://127.0.0.1:5000/student/Michelle
-@auth.route('/student/<name>',methods = ['GET', 'POST', 'UPDATE'])
+@auth.route('/student/<fName>',methods = ['GET', 'POST', 'UPDATE'])
 def student(new_applicant):
-    return render_template("student.html")#, name=new_applicant.fName) #passing name from def
+    if request.method == 'POST':
+        new_applicant = request.form.get('fName')
+    return render_template("student.html", new_applicant=new_applicant)#, name=new_applicant.fName) #passing name from def
     #return "<h1>Welcome {}!</h1>".format(name)
 
 

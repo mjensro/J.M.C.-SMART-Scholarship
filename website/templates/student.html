@@ -1,3 +1,5 @@
 <!--Used after application is submitted, return :  Gender,  Academic Status (Freshman, Sophomore, Junior, Senior),
     Cumulative GPA, Number of credit hours taken during latest (current) semester, and latest semester GPA as a table of some sort-->
-<h1>Hello {{new_applicant|capitalize}}</h1>
+{% extends "base.html" %}
+{% block title %}Student Grades{% endblock %}
+    <h1>Hello {{new_applicant|capitalize}}</h1>

@@ -1,0 +1,80 @@
+<!--Application Submission page, errors are handled via base.html and auth.py-->
+{% extends "base.html" %}
+{% block title %}J.M.C Smart Scholarship{% endblock %}
+{% block content %}
+<form method="POST"> <!--Method can change based on 'logging in' or 'signing up'-->
+    <h3 align = "center">Create a Student Record</h3>
+<div class="form-group">
+    <label for = "ID">Student ID</label>
+    <input 
+    type="ID" 
+    class="form-control" 
+    id="ID"
+    name="ID"
+    placeholder="Enter student identification number"
+    />
+</div>
+<div class="form-group">
+    <label for = "fName">First Name</label>
+    <input 
+    type="fName" 
+    class="form-control" 
+    id="fName"
+    name="fName"
+    placeholder="Enter first name"
+    />
+</div>
+<div class="form-group">
+    <label for = "lName">Last Name</label>
+    <input 
+    type="lName" 
+    class="form-control" 
+    id="lName"
+    name="lName"
+    placeholder="Enter last name"
+    />
+</div>
+<div class="form-group">
+    <label for = "email">Email Address</label>
+    <input 
+    type="email" 
+    class="form-control" 
+    id="email"
+    name="email"
+    placeholder="Ex. Student@umich.edu"
+    />
+</div>
+<div class="form-group">
+    <label for = "pNum">Phone Number</label>
+    <input 
+    type="pNum" 
+    class="form-control" 
+    id="pNum"
+    name="pNum"
+    placeholder="Ex. 1234567890"
+    />
+</div>
+<div class="form-group">
+    <label for = "zip">Zip Code</label>
+    <input 
+    type="zip" 
+    class="form-control" 
+    id="zip"
+    name="zip"
+    placeholder="Enter Zip Code"
+    />
+</div>
+<div class="form-group">
+    <label for = "dob">Date of Birth</label>
+    <input 
+    type="dob" 
+    class="form-control" 
+    id="dob"
+    name="dob"
+    placeholder="Ex. 01/01/22"
+    />
+</div>
+<br />
+<button type ="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

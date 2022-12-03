@@ -9,16 +9,16 @@ from sqlalchemy.sql import func
 #Registrar Data Store
 class Registrar(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique = True) #only 1 email per user
-    fName = db.Column(db.String(100))
-    lName = db.Column(db.String(100))
-    pNum = db.Column(db.String(11))
-    zip = db.Column(db.String(5))
-    dob = db.Column(db.String(10))
+    fName = db.Column(db.String(100), nullable = False)
+    lName = db.Column(db.String(100), nullable = False)
+    email = db.Column(db.String(100), unique = True, nullable = False)
+    pNum = db.Column(db.String(11), nullable = False)
+    zip = db.Column(db.String(5), nullable = False)
+    dob = db.Column(db.String(10), nullable = False)
     #notes = db.relationship('Applicant')
 #can prepopulate all data
 
-#applicant data store
+#Applicant data store
 class Applicant(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     gender = db.Column(db.String(6))
@@ -26,9 +26,14 @@ class Applicant(db.Model):
     cGPA = db.Column(db.Float(5)) #cumulative GPA
     creditHrs = db.Column(db.Integer)
     semGPA=db.Column(db.Float(5)) #semester GPA
-    date = db.Column(db.DateTime(timezone=True),default=func.now)#stores current date&time for application being submitted
+    date = db.Column(db.DateTime(timezone=True),default=func.now) #default = datetime.utcnow)#stores current date&time for application being submitted
     #user_id = db.Column(db.Integer, db.ForeignKey('Registrar.id'))
+
+    #create string
+ #   def __repr__(self):
+#        return '<Name %r>' % self.name
 #can prepopulate some data
+
 
 #class Accounting
 #The committee also requests the tuition amount paid by the student at the beginning of the semester from the “Accounting Data Store” (Student Number and Tuition from latest semester)

@@ -10,10 +10,10 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'a'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
-    #'sqlite://///C:/flasker/J.M.C.-SMART-Scholarship/website/database.db' for windows setup
-    #'sqlite:///////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
-    #'sqlite:///////website/database.db'
-    #'f'sqlite:///{DB_NAME}'
+    #'sqlite:////C:/flasker/J.M.C.-SMART-Scholarship/website/database.db' for Michelles windows setup
+    #'sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
+    #'sqlite:////website/database.db'
+    #'f'sqlite:////{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
    # db=SQLAlchemy()
     db.init_app(app)

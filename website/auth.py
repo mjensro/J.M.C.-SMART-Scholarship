@@ -19,7 +19,11 @@ def create_student():
         dob = request.form.get('dob')
 
         user = Registrar.query.filter_by(email=email,id=id).first() #makes sure there is no previous entries w/ this same email & id
+        email=request.form.get("email")
+
         if user:
+            flash('ID already exists',category='error')
+        elif email:
             flash('Email already exists',category='error')
         elif len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')

@@ -8,7 +8,7 @@ from sqlalchemy.sql import func
 
 #Registrar Data Store
 class Registrar(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(8), primary_key=True)
     fName = db.Column(db.String(100), nullable = False)
     lName = db.Column(db.String(100), nullable = False)
     email = db.Column(db.String(100), unique = True, nullable = False)
@@ -20,7 +20,7 @@ class Registrar(db.Model, UserMixin):
 
 #Applicant data store
 class Applicant(db.Model):
-    id = db.Column(db.Integer,primary_key = True)
+    id = db.Column(db.String(8),primary_key = True)
     gender = db.Column(db.String(6))
     academicStatus = db.Column(db.String(9)) #Freshman, Sophomore, Junior, Senior
     cGPA = db.Column(db.Float(5)) #cumulative GPA

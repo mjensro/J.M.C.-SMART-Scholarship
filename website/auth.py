@@ -18,18 +18,16 @@ def create_student():
         zip = request.form.get('zip')
         dob = request.form.get('dob')
 
-        user = Registrar.query.filter_by(email=email).first()
+        user = Registrar.query.filter_by(email=email,id=id).first() #makes sure there is no previous entries w/ this same email & id
         if user:
             flash('Email already exists',category='error')
-        elif user:
-            flash('Email already exists.', category='error')
         elif len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')
         else:
             new_user = Registrar(email=email, fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
             db.session.add(new_user)
             db.session.commit()
-            login_user(new_user, remember=True)
+         #   login_user(new_user, remember=True)
             flash('Account Created!', category='success')
             return redirect(url_for('views.home')) #change routing page
 
@@ -49,18 +47,22 @@ def create_application():
 
         user = Registrar.query.filter_by(id=id).first()
         if user:
-            if check_password_hash(user.id,id):
-                 flash('Log in Successful', category='success')
+            if user.id == id:
+                 flash('Application Submitted', category='success')
+               #  login_user(user,remember=True)
+                 return redirect(url_for('auth.student'))
             else:
-                flash('Incorrect Submission, Try Again',category='error')
+                flash('Incorrect ID, Try Again',category='error')
+                
         else:
-            flash('Email does not exist',category='error')
+            flash('Email does not exist', category='error')
+
     #code is currently set up to create application inputs as "new users", its not looking for pre-existing IDs yet
-        new_applicant = Registrar(email=email,fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
-        db.session.add(new_applicant)# add a new user,etc.
-        db.session.commit() #commit changes to db, update file
-        flash('Application Submitted', category='success')
-        return redirect(url_for('auth.student'))#'views.home' = forward to next page with student GPA,etc. from Applicant Database
+    # new_applicant = Registrar(email=email,fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
+    # db.session.add(new_applicant)# add a new user,etc.
+    #  db.session.commit() #commit changes to db, update file
+
+     #   return redirect(url_for('auth.student'))#'views.home' = forward to next page with student GPA,etc. from Applicant Database
 
 
 

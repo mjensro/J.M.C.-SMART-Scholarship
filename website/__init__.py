@@ -9,7 +9,7 @@ DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'a'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
     #'sqlite://///C:/flasker/J.M.C.-SMART-Scholarship/website/database.db' for windows setup
     #'sqlite:///////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
     #'sqlite:///////website/database.db'
@@ -31,13 +31,8 @@ def create_app():
      #   db.create_all()
     return app
 
-
-'''def create_database(app):#if database DNE, it creates it, otherwise leave it alone as to not overwrite already existing data
-    if not path('website/' + DB_NAME):
-      # db.create_all(app=app)
-    print('Database Created')'''
-def create_database(app):
-    if not path.exists('C:/flasker/J.M.C.-SMART-Scholarship/website/' + DB_NAME):
+def create_database(app):#if database DNE, it creates it, otherwise leave it alone as to not overwrite already existing data
+    if not path.exists('sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'): #+ DB_NAME):
         with app.app_context():
             db.create_all()
             print('Created Database!')

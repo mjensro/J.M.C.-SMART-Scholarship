@@ -26,9 +26,14 @@ class Registrar(db.Model, UserMixin):
 #Applicant data store
 class Applicant(db.Model):
     id = db.Column(db.String(8),primary_key = True)
+    gender = db.Column(db.String(6))
+    academicStatus = db.Column(db.String(9))  # Freshman, Sophomore, Junior, Senior
+    cGPA = db.Column(db.Float(5))  # cumulative GPA
+    creditHrs = db.Column(db.Integer)
+    semGPA = db.Column(db.Float(5))  # semester GPA
+    date = db.Column(db.DateTime(timezone=True),default=func.now) #default = datetime.utcnow)#stores current date&time for application being submitted
     eligibilityStatus = db.Column(db.String(15), nullable = False)
     reason = db.Column(db.String(100), nullable = True)
-    date = db.Column(db.DateTime(timezone=True),default=func.now) #default = datetime.utcnow)#stores current date&time for application being submitted
     #user_id = db.Column(db.Integer, db.ForeignKey('Registrar.id'))
 
     #create string

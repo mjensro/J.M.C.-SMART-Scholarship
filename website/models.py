@@ -15,17 +15,19 @@ class Registrar(db.Model, UserMixin):
     pNum = db.Column(db.String(11), nullable = False)
     zip = db.Column(db.String(5), nullable = False)
     dob = db.Column(db.String(10), nullable = False)
+    gender = db.Column(db.String(6))
+    academicStatus = db.Column(db.String(9))  # Freshman, Sophomore, Junior, Senior
+    cGPA = db.Column(db.Float(5))  # cumulative GPA
+    creditHrs = db.Column(db.Integer)
+    semGPA = db.Column(db.Float(5))  # semester GPA
     #notes = db.relationship('Applicant')
 #can prepopulate all data
 
 #Applicant data store
 class Applicant(db.Model):
     id = db.Column(db.String(8),primary_key = True)
-    gender = db.Column(db.String(6))
-    academicStatus = db.Column(db.String(9)) #Freshman, Sophomore, Junior, Senior
-    cGPA = db.Column(db.Float(5)) #cumulative GPA
-    creditHrs = db.Column(db.Integer)
-    semGPA=db.Column(db.Float(5)) #semester GPA
+    eligibilityStatus = db.Column(db.String(15), nullable = False)
+    reason = db.Column(db.String(100), nullable = True)
     date = db.Column(db.DateTime(timezone=True),default=func.now) #default = datetime.utcnow)#stores current date&time for application being submitted
     #user_id = db.Column(db.Integer, db.ForeignKey('Registrar.id'))
 

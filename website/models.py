@@ -41,7 +41,8 @@ class Applicant(db.Model):
 #The committee also requests the tuition amount paid by the student at the beginning of the semester from the “Accounting Data Store” (Student Number and Tuition from latest semester)
 class Accounting(db.Model):
     id = db.Column(db.String(8),primary_key = True)
-    latestSemesterPayed = db.Column(db.Float(5))
+    latestSemesterPayed = db.Column(db.Float(7))
+    tuitionAmount = db.Column(db.Float(7))
 #can pre-populate all data
 
 #class Awarded The awarded amount (i.e., tuition amount) will be stored in the “Awarded Data Store

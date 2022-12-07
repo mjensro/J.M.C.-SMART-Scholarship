@@ -37,3 +37,6 @@ def create_database(app):#if database DNE, it creates it, otherwise leave it alo
             db.create_all()
             print('Created New Database!')
             print('Exiting Program')
+    else: 
+        print("Database Already Exists")
+        print("Exiting Program")

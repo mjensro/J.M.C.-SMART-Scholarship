@@ -1,6 +1,6 @@
 #Used to navigate to other pages
 from flask import Blueprint,render_template,request,flash,redirect,url_for
-from .models import Registrar,Applicant
+from .models import Registrar,Applicant,Accounting,Awarded
 from werkzeug.security import generate_password_hash, check_password_hash #might not be needed, currently using to verify email/student id
 from flask_login import login_user, login_required, logout_user, current_user
 from . import db
@@ -50,23 +50,23 @@ def create_application():
             while user.id == id:
                 if user.fName!=fName:
                     flash('Data field(s) do not match Registrar Data Store: <First Name> – please reenter data',category='error')
-                    continue
+                    break
                 elif user.lName!=lName:
                     flash('Data field(s) do not match Registrar Data Store: <Last Name> – please reenter data',category='error')
-                    continue                        
+                    break                        
                 elif user.zip!=zip:
                     flash('Data field(s) do not match Registrar Data Store: <Zip Code> – please reenter data',category='error')   
-                    continue      
+                    break      
                 elif user.dob!=dob:
                     flash('Data field(s) do not match Registrar Data Store: <Date of Birth> – please reenter data',category='error')
-                    continue
+                    break
                 elif user.pNum!=pNum:
                     flash('<Phone Number> does not match Registrar Data Store. Updating to new value...', category='warning')
                     user.pNum = request.form['pNum']
                     Registrar(pNum=pNum)
                     db.session.commit()
                     flash('Phone Number has been updated', category='success')
-                    continue
+                    break
                     #return redirect(url_for('auth.student'))
                 elif user.email!=email:
                     flash('<Email> does not match Registrar Data Store. Updating to new value...', category='warning') 
@@ -74,7 +74,7 @@ def create_application():
                     Registrar(email=email)
                     db.session.commit()
                     flash('Email has been updated', category='success')
-                    continue
+                    break
                     #return redirect(url_for('auth.student'))
                 elif user.id!=id:
                     flash('Data field(s) do not match Registrar Data Store: <ID> – please reenter data', category='error')
@@ -82,7 +82,7 @@ def create_application():
                 else:
                     flash('Application Submitted', category='success')
                     return redirect(url_for('auth.student'))
-                    break                
+                    #break                
 
     # new_applicant = Registrar(email=email,fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
     # db.session.add(new_applicant)# add a new user,etc.

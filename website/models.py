@@ -15,6 +15,11 @@ class Registrar(db.Model, UserMixin):
     pNum = db.Column(db.String(11), nullable = False)
     zip = db.Column(db.String(5), nullable = False)
     dob = db.Column(db.String(10), nullable = False)
+    gender = db.Column(db.String(6))
+    academicStatus = db.Column(db.String(9))  # Freshman, Sophomore, Junior, Senior
+    cGPA = db.Column(db.Float(5))  # cumulative GPA
+    creditHrs = db.Column(db.Integer)
+    semGPA = db.Column(db.Float(5))  # semester GPA
     #notes = db.relationship('Applicant')
 #can prepopulate all data
 
@@ -22,11 +27,13 @@ class Registrar(db.Model, UserMixin):
 class Applicant(db.Model):
     id = db.Column(db.String(8),primary_key = True)
     gender = db.Column(db.String(6))
-    academicStatus = db.Column(db.String(9)) #Freshman, Sophomore, Junior, Senior
-    cGPA = db.Column(db.Float(5)) #cumulative GPA
+    academicStatus = db.Column(db.String(9))  # Freshman, Sophomore, Junior, Senior
+    cGPA = db.Column(db.Float(5))  # cumulative GPA
     creditHrs = db.Column(db.Integer)
-    semGPA=db.Column(db.Float(5)) #semester GPA
+    semGPA = db.Column(db.Float(5))  # semester GPA
     date = db.Column(db.DateTime(timezone=True),default=func.now) #default = datetime.utcnow)#stores current date&time for application being submitted
+    eligibilityStatus = db.Column(db.String(15), nullable = False)
+    reason = db.Column(db.String(100), nullable = True)
     #user_id = db.Column(db.Integer, db.ForeignKey('Registrar.id'))
 
     #create string
@@ -36,10 +43,15 @@ class Applicant(db.Model):
 
 
 #class Accounting
-#The committee also requests the tuition amount paid by the student at the beginning of the semester from the “Accounting Data Store” 
-#(Student Number and Tuition from latest semester)
+#The committee also requests the tuition amount paid by the student at the beginning of the semester from the “Accounting Data Store” (Student Number and Tuition from latest semester)
+class Accounting(db.Model):
+    id = db.Column(db.String(8),primary_key = True)
+    latestSemesterPayed = db.Column(db.Float(7), nullable = True)
+    tuitionAmount = db.Column(db.Float(7), nullable = True)
 #can pre-populate all data
 
-#class Awarded The awarded amount
-# tuition amount
+#class Awarded The awarded amount (i.e., tuition amount) will be stored in the “Awarded Data Store
+class Awarded(db.Model):
+    id = db.Column(db.String(8),primary_key = True)
+    awardedAmount = db.Column(db.Float(5))
 #can prepopulate some data

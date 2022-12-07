@@ -36,8 +36,10 @@ class Applicant(db.Model):
 
 
 #class Accounting
-#The committee also requests the tuition amount paid by the student at the beginning of the semester from the “Accounting Data Store” (Student Number and Tuition from latest semester)
+#The committee also requests the tuition amount paid by the student at the beginning of the semester from the “Accounting Data Store” 
+#(Student Number and Tuition from latest semester)
 #can pre-populate all data
 
-#class Awarded The awarded amount (i.e., tuition amount) will be stored in the “Awarded Data Store
+#class Awarded The awarded amount
+# tuition amount
 #can prepopulate some data

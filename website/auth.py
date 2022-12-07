@@ -6,7 +6,6 @@ from flask_login import login_user, login_required, logout_user, current_user
 from . import db
 
 auth = Blueprint('auth',__name__) #blueprint for flask
-#submit = post request
 @auth.route('/create-student', methods = ['GET', 'POST', 'UPDATE'])
 def create_student():
     if request.method == 'POST':
@@ -19,19 +18,16 @@ def create_student():
         dob = request.form.get('dob')
 
         user = Registrar.query.filter_by(email=email,id=id).first() #makes sure there is no previous entries w/ this same email & id
-        email=request.form.get("email")
+        #email=request.form.get("email")
 
-        if user:
+        if user: #if it already exists, else say if not user for something that should exist
             flash('ID already exists',category='error')
-        elif email:
-            flash('Email already exists',category='error')
-        elif len(email) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
+ #       elif user.email == email:
+ #           flash('Email already exists',category='error')
         else:
             new_user = Registrar(email=email, fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
             db.session.add(new_user)
             db.session.commit()
-         #   login_user(new_user, remember=True)
             flash('Account Created!', category='success')
             return redirect(url_for('views.home')) #change routing page
 
@@ -48,27 +44,51 @@ def create_application():
         pNum = request.form.get('pNum')
         zip = request.form.get('zip')
         dob = request.form.get('dob')
-
+        
         user = Registrar.query.filter_by(id=id).first()
         if user:
-            if user.id == id:
-                 flash('Application Submitted', category='success')
-               #  login_user(user,remember=True)
-                 return redirect(url_for('auth.student'))
-            else:
-                flash('Incorrect ID, Try Again',category='error')
-                
-        else:
-            flash('Email does not exist', category='error')
+            while user.id == id:
+                if user.fName!=fName:
+                    flash('Data field(s) do not match Registrar Data Store: <First Name> – please reenter data',category='error')
+                    continue
+                elif user.lName!=lName:
+                    flash('Data field(s) do not match Registrar Data Store: <Last Name> – please reenter data',category='error')
+                    continue                        
+                elif user.zip!=zip:
+                    flash('Data field(s) do not match Registrar Data Store: <Zip Code> – please reenter data',category='error')   
+                    continue      
+                elif user.dob!=dob:
+                    flash('Data field(s) do not match Registrar Data Store: <Date of Birth> – please reenter data',category='error')
+                    continue
+                elif user.pNum!=pNum:
+                    flash('<Phone Number> does not match Registrar Data Store. Updating to new value...', category='warning')
+                    user.pNum = request.form['pNum']
+                    Registrar(pNum=pNum)
+                    db.session.commit()
+                    flash('Phone Number has been updated', category='success')
+                    continue
+                    #return redirect(url_for('auth.student'))
+                elif user.email!=email:
+                    flash('<Email> does not match Registrar Data Store. Updating to new value...', category='warning') 
+                    user.email = request.form['email']
+                    Registrar(email=email)
+                    db.session.commit()
+                    flash('Email has been updated', category='success')
+                    continue
+                    #return redirect(url_for('auth.student'))
+                elif user.id!=id:
+                    flash('Data field(s) do not match Registrar Data Store: <ID> – please reenter data', category='error')
+                    continue
+                else:
+                    flash('Application Submitted', category='success')
+                    return redirect(url_for('auth.student'))
+                    break                
 
-    #code is currently set up to create application inputs as "new users", its not looking for pre-existing IDs yet
     # new_applicant = Registrar(email=email,fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
     # db.session.add(new_applicant)# add a new user,etc.
     #  db.session.commit() #commit changes to db, update file
 
-     #   return redirect(url_for('auth.student'))#'views.home' = forward to next page with student GPA,etc. from Applicant Database
-
-
+    #   return redirect(url_for('auth.student'))#'views.home' = forward to next page with student GPA,etc. from Applicant Database
 
        #if no Student Number match:
        #  flash('No Student Number Match – please reenter data', category = 'error')
@@ -86,11 +106,12 @@ def create_application():
     #print(data)
     return render_template("appform.html")
 
-#http://127.0.0.1:5000/student/Michelle
+#http://127.0.0.1:5000/student
 @auth.route('/student',methods = ['GET', 'POST', 'UPDATE'])
 def student():#new_applicant):
-#    if request.method == 'POST':
-     #   new_applicant = request.form.get('fName')
+    if request.method == 'POST':
+      id = Applicant.request.form.get('ID')
+
     return render_template("student.html")#, name=new_applicant.fName) #passing name from def
     #return "<h1>Welcome {}!</h1>".format(name)
 

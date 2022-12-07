@@ -35,4 +35,5 @@ def create_database(app):#if database DNE, it creates it, otherwise leave it alo
     if not path.exists('sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'): #+ DB_NAME):
         with app.app_context():
             db.create_all()
-            print('Created Database!')
+            print('Created New Database!')
+            print('Exiting Program')

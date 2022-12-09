@@ -55,3 +55,10 @@ class Awarded(db.Model):
     id = db.Column(db.String(8),primary_key = True)
     awardedAmount = db.Column(db.Float(5))
 #can prepopulate some data
+
+#class Users Committee member logins will be stored in this data store
+class User(db.Model, UserMixin):
+    id = db.Column(db.String(8),primary_key = True)
+    userName = db.Column(db.String(8))
+    passwordHash = db.Column(db.String(128))
+#can prepopulate some data

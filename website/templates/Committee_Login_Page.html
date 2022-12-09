@@ -1,0 +1,27 @@
+<!--Application Submission page, errors are handled via base.html and auth.py-->
+{% extends "base.html" %}
+{% block title %}J.M.C Smart Scholarship{% endblock %}
+{% block content %}
+<form method="POST"> <!--Method can change based on 'logging in' or 'signing up'-->
+    <h2 align = "center">J.M.C Smart Scholarship</h2>
+    <h3 align = "center">Committee Login</h3>
+
+    {{ form.hidden_tag() }}
+
+    {{form.userName.label(
+    class = "form-label")}}
+    {{ form.userName(class="form-control", placeholder="Enter Username") }}
+    <br/>
+
+    {{form.passWord.label(
+    class = "form-label")}}
+    {{ form.passWord(class="form-control", placeholder="Enter Password") }}
+    <br/>
+
+    {{ form.submit(class="btn btn-secondary")
+    }}
+
+</body>
+</html>
+</form>
+{% endblock %}

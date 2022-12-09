@@ -21,6 +21,24 @@ def eligibilityCheck():
 
         else:
             applicant.eligibilityStatus = "Non-Eligible"
+
+            if applicant.cGPA < 3.2 and applicant.creditHrs < 12 and age > 23:
+                applicant.reason = "Does not meet any requirements."
+
+            else:
+                if applicant.cGPA < 3.2:
+                    applicant.reason = "Does not meet minimum GPA requirement."
+
+                applicantReason = applicant.reason
+
+                if applicantReason == None:
+                    applicantReason = ""
+
+                if applicant.creditHrs < 12:
+                    applicant.reason = f"{applicantReason} \n" + "Does not meet minimum credit hours requirement."
+                if age > 23:
+                    applicant.reason = f"{applicantReason} \n" "Does not meet maximum age requirement."
+
             db.session.commit()
 
     flash('Finished checking!', category='success')

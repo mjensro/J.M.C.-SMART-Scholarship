@@ -1,4 +1,8 @@
-<!--Application Submission page, errors are handled via base.html and auth.py-->
+<!--Description: Webpage of what committee members will see after logging in.
+                 Here they will be able to view all applicants, check eligibility of all applicants,
+                 and search for individual applicants via their studentID)
+    Author: Michael Faustino-->
+
 {% extends "base.html" %}
 {% block title %}J.M.C Smart Scholarship{% endblock %}
 {% block content %}
@@ -27,6 +31,7 @@
 </head>
 
 <form method="POST">
+    <!--Look for StudentID Form-->
     <h2 align = "center">J.M.C Smart Scholarship</h2>
     <h3 align = "center">Welcome to the committee dashboard!</h3>
 
@@ -43,9 +48,11 @@
 
 <form method="POST">
     {{ form.hidden_tag() }}
+    <!--View all button-->
     {{ form.displayAll(class="btn btn-secondary")
     }}
 
+    <!--Check for eligibility button-->
     <a href="{{ url_for('eli.eligibilityCheck')}}"
     class = "btn btn-success">
     Check Applicant Eligibility
@@ -70,7 +77,8 @@
         </tr>
       </thead>
       <tbody>
-        {% if applicants is not iterable %}
+        {% if applicants is not iterable %} <!--Checks if a single student is in applicant datastore or if user submits
+                                                or if a user is searching for an individual-->
             <tr>
               <th scope="row">{{applicants.id}}</th>
               <td>{{applicants.gender}}</td>
@@ -85,7 +93,7 @@
 
         {% else %}
 
-            {% for applicant in applicants %}
+            {% for applicant in applicants %} <!--Loop over to show all applicants-->
                 <tr>
                   <th scope="row">{{applicant.id}}</th>
                   <td>{{applicant.gender}}</td>

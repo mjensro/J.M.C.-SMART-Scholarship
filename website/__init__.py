@@ -38,8 +38,8 @@ def create_app():
 
     app.register_blueprint(views, url_prefix='/')#prefix states what prefix is needed to 
     app.register_blueprint(auth, url_prefix='/')#registering blueprints
-    app.register_blueprint(cLogin, url_prefix='/')
-    app.register_blueprint(eli, url_prefix='/')# registering blueprints
+    app.register_blueprint(cLogin, url_prefix='/') #registering blueprint for the committee login
+    app.register_blueprint(eli, url_prefix='/')# registering blueprint for the eligibility checker
     
     #from .models import Registrar, Applicant #import other databases
     from . import models

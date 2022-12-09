@@ -87,7 +87,7 @@ def create_application():
             if user.creditHrs == 0:
                 flash('Cannot apply', category='error')
 
-            else:
+            else: #Will begin to enter data into database
                 applicant = Applicant(id=user.id,
                                       gender=user.gender,
                                       academicStatus=user.academicStatus,
@@ -99,7 +99,7 @@ def create_application():
                                       reason=None)
                 applicantCheck = applicant.query.filter_by(id=applicant.id).first()
 
-                if applicantCheck:
+                if applicantCheck: #Check if applicant is already in the applicant datastore
                     flash('Already applied!', category='error')
 
                 else:
@@ -107,8 +107,8 @@ def create_application():
                     db.session.commit()
                     flash('Application Submitted', category='success')
 
-                    print(applicant.gender, user.fName)
-
+                    # Had to send the object this way because the object would be turned into a string.
+                    # Redirects to student records page with arguments
                     return redirect(url_for('auth.student',userFname=user.fName, applicantID=applicant.id, applicantG=applicant.gender,
                                applicantAS=applicant.academicStatus, applicantCGPA=applicant.cGPA, applicantCHrs=applicant.creditHrs,
                                 applicantSGPA=applicant.semGPA, applicantDate=applicant.date))
@@ -139,12 +139,14 @@ def create_application():
 
 #http://127.0.0.1:5000/student
 @auth.route('/student/<applicantID>/<userFname>/<applicantG>/<applicantAS>/<applicantCGPA>/<applicantCHrs>/<applicantSGPA>/<applicantDate>',methods = ['GET','POST'])
-def student(applicantID, userFname, applicantG, applicantAS, applicantCGPA, applicantCHrs, applicantSGPA, applicantDate):#new_applicant):
+def student(applicantID, userFname, applicantG, applicantAS, applicantCGPA, applicantCHrs, applicantSGPA, applicantDate):
+    #Description: Function sends arguments to the student.html webpage where jinja code will handle the variables.
+    #Pre-condition: applicantID, userFname, applicantG, applicantAS, applicantCGPA, applicantCHrs, applicantSGPA and
+    #               applicantDate. Needs to be sent from create_application()
+    #Post-condition: parameters to the student.html webpage where jinja code will handle them.
+    #Author: Michael Faustino
+
+
     return render_template("student.html", userFname=userFname, applicantID=applicantID, applicantG=applicantG,
                            applicantAS=applicantAS, applicantCGPA=applicantCGPA, applicantCHrs=applicantCHrs,
-                           applicantSGPA=applicantSGPA, applicantDate=applicantDate)#, name=new_applicant.fName) #passing name from def
-    #return "<h1>Welcome {}!</h1>".format(name)
-
-
-    #db.session.add() add a new user,etc.
-    #db.session.commit() commit changes to db, update file
+                           applicantSGPA=applicantSGPA, applicantDate=applicantDate)

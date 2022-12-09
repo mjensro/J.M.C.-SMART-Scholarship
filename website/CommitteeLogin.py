@@ -17,6 +17,8 @@ class loginForm(FlaskForm):
 class applicantIDForm(FlaskForm):
     id = StringField("Student ID", validators=[DataRequired()])
     submit = SubmitField("Submit")
+    displayAll = SubmitField("Display all applicants")
+
 
 
 @cLogin.route('/committee-login', methods = ['GET', 'POST'])
@@ -42,10 +44,14 @@ def login():
 @login_required
 def dashboard():
     form = applicantIDForm()
-
     applicants = Applicant.query.order_by(Applicant.id)
 
-    print(applicants)
+    if form.validate_on_submit():
+        student = Applicant.query.filter_by(id=form.id.data).first()
+        if student:
+            return render_template("Committee_dash.html", form=form, applicants=student)
+        else:
+            flash('No student found!', category='error')
 
     return render_template("Committee_dash.html", form=form, applicants=applicants)
 

@@ -26,7 +26,7 @@
     </style>
 </head>
 
-<form method="POST"> <!--Method can change based on 'logging in' or 'signing up'-->
+<form method="POST">
     <h2 align = "center">J.M.C Smart Scholarship</h2>
     <h3 align = "center">Welcome to the committee dashboard!</h3>
 
@@ -39,8 +39,12 @@
 
     {{ form.submit(class="btn btn-secondary")
     }}
-</body>
-</html>
+</form>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.displayAll(class="btn btn-secondary")
+    }}
 </form>
 
 
@@ -61,19 +65,35 @@
         </tr>
       </thead>
       <tbody>
-        {% for applicant in applicants %}
-        <tr>
-          <th scope="row">{{applicant.id}}</th>
-          <td>{{applicant.gender}}</td>
-          <td>{{applicant.academicStatus}}</td>
-          <td>{{applicant.cGPA}}</td>
-          <td>{{applicant.creditHrs}}</td>
-          <td>{{applicant.semGPA}}</td>
-          <td>DECEMBER</td>
-          <td>{{applicant.eligibilityStatus}}</td>
-          <td>{{applicant.reason}}</td>
-        </tr>
-        {% endfor %}
+        {% if applicants is not iterable %}
+            <tr>
+              <th scope="row">{{applicants.id}}</th>
+              <td>{{applicants.gender}}</td>
+              <td>{{applicants.academicStatus}}</td>
+              <td>{{applicants.cGPA}}</td>
+              <td>{{applicants.creditHrs}}</td>
+              <td>{{applicants.semGPA}}</td>
+              <td>DECEMBER</td>
+              <td>{{applicants.eligibilityStatus}}</td>
+              <td>{{applicants.reason}}</td>
+            </tr>
+
+        {% else %}
+
+            {% for applicant in applicants %}
+                <tr>
+                  <th scope="row">{{applicant.id}}</th>
+                  <td>{{applicant.gender}}</td>
+                  <td>{{applicant.academicStatus}}</td>
+                  <td>{{applicant.cGPA}}</td>
+                  <td>{{applicant.creditHrs}}</td>
+                  <td>{{applicant.semGPA}}</td>
+                  <td>DECEMBER</td>
+                  <td>{{applicant.eligibilityStatus}}</td>
+                  <td>{{applicant.reason}}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
       </tbody>
     </table>
 </div>

@@ -81,38 +81,38 @@ def create_application():
                     flash('Data field(s) do not match Registrar Data Store: <ID> – please reenter data', category='error')
                     continue
                 else:
+                    if user.creditHrs == 0:
+                        flash('Cannot apply', category='error')
+
+                    else:  # Will begin to enter data into database
+                        applicant = Applicant(id=user.id,
+                                              gender=user.gender,
+                                              academicStatus=user.academicStatus,
+                                              cGPA=user.cGPA,
+                                              creditHrs=user.creditHrs,
+                                              semGPA=user.semGPA,
+                                              date=datetime.datetime.now(),
+                                              eligibilityStatus=None,
+                                              reason=None)
+                        applicantCheck = applicant.query.filter_by(id=applicant.id).first()
+
+                        if applicantCheck:  # Check if applicant is already in the applicant datastore
+                            flash('Already applied!', category='error')
+
+                        else:
+                            db.session.add(applicant)
+                            db.session.commit()
+                            flash('Application Submitted', category='success')
+
+                            # Had to send the object this way because the object would be turned into a string.
+                            # Redirects to student records page with arguments
+                            return redirect(url_for('auth.student', userFname=user.fName, applicantID=applicant.id,
+                                                    applicantG=applicant.gender,
+                                                    applicantAS=applicant.academicStatus, applicantCGPA=applicant.cGPA,
+                                                    applicantCHrs=applicant.creditHrs,
+                                                    applicantSGPA=applicant.semGPA, applicantDate=applicant.date))
                     #return redirect(url_for('auth.student'))
                     break
-
-            if user.creditHrs == 0:
-                flash('Cannot apply', category='error')
-
-            else: #Will begin to enter data into database
-                applicant = Applicant(id=user.id,
-                                      gender=user.gender,
-                                      academicStatus=user.academicStatus,
-                                      cGPA=user.cGPA,
-                                      creditHrs=user.creditHrs,
-                                      semGPA=user.semGPA,
-                                      date=datetime.datetime.now(),
-                                      eligibilityStatus=None,
-                                      reason=None)
-                applicantCheck = applicant.query.filter_by(id=applicant.id).first()
-
-                if applicantCheck: #Check if applicant is already in the applicant datastore
-                    flash('Already applied!', category='error')
-
-                else:
-                    db.session.add(applicant)
-                    db.session.commit()
-                    flash('Application Submitted', category='success')
-
-                    # Had to send the object this way because the object would be turned into a string.
-                    # Redirects to student records page with arguments
-                    return redirect(url_for('auth.student',userFname=user.fName, applicantID=applicant.id, applicantG=applicant.gender,
-                               applicantAS=applicant.academicStatus, applicantCGPA=applicant.cGPA, applicantCHrs=applicant.creditHrs,
-                                applicantSGPA=applicant.semGPA, applicantDate=applicant.date))
-
     return render_template("appform.html", user=current_user)
 
 

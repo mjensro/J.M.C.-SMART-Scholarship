@@ -5,12 +5,12 @@
     <meta charset = "utf-8"/>
     <meta charset = "viewport" content ="width=device-width, initial-scale=1"/>
 
-    <link rel="stylesheet" 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" 
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
     <title>{% block title %}Home{% endblock %}</title>
@@ -23,9 +23,17 @@
     <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
             <a class="nav-item nav-link" id="Home" href ='/'>Home</a>
-            <a class="nav-item nav-link" id="create-application" href ='/create-student'>New Student Account</a>  <!--Using to create records in Database-->
+            <a class="nav-item nav-link" id="create-student" href ='/create-student'>New Student Account</a>  <!--Using to create records in Database-->
             <a class="nav-item nav-link" id="create-application" href ='/create-application'>Create Application</a>
-            <a class="nav-item nav-link" id="committee-login" href ='/committee-login'>Committee-login</a>
+
+            <!-- Jinja text to show login and log out -->
+            {% if current_user.is_authenticated %} <!-- Shows dash and logout on banner when verified logged in is true-->
+                <a class="nav-item nav-link" id="committee-dash" href ='/committee-dash'>Dashboard</a>
+                <a class="nav-item nav-link" id="committee-logout" href ='/logout'>Logout</a>
+            {% else %} <!-- Shows login when not logged in-->
+                <a class="nav-item nav-link" id="committee-login" href ='/committee-login'>Committee-login</a>
+            {% endif %}
+
             <!--Create extra pages/htmls as needed-->
         </div>
     </div>

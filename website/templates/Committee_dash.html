@@ -1,12 +1,80 @@
-<!--Used after application is submitted, return :  Gender,  Academic Status (Freshman, Sophomore, Junior, Senior),
-    Cumulative GPA, Number of credit hours taken during latest (current) semester, and latest semester GPA as a table of some sort-->
+<!--Application Submission page, errors are handled via base.html and auth.py-->
 {% extends "base.html" %}
-   <!-- <h1>Hello {{new_applicant|capitalize}}</h1>-->
+{% block title %}J.M.C Smart Scholarship{% endblock %}
 {% block content %}
-   <h2 align = "center">J.M.C Smart Scholarship</h2>
-   <h3 align = "center">Dash</h3>
+
+<head>
+    <style type ="text/css">
+        table{
+        border-collapse: collapse; width: 100%;
+        }
+
+        th, td{ padding: 8px 16px;
+        }
+
+        th{
+        background:#495E6A;
+        }
+
+        .table-fixed{
+        overflow: auto; height: 100px;
+        }
+
+        .table-fixed thead th {
+        position: sticky; top: 0; z-index: 1;
+        }
+    </style>
+</head>
+
+<form method="POST"> <!--Method can change based on 'logging in' or 'signing up'-->
+    <h2 align = "center">J.M.C Smart Scholarship</h2>
+    <h3 align = "center">Welcome to the committee dashboard!</h3>
+
+    {{ form.hidden_tag() }}
+
+    {{form.id.label(
+    class = "form-label")}}
+    {{ form.id(class="form-control", placeholder="Enter Student Id") }}
+    <br/>
+
+    {{ form.submit(class="btn btn-secondary")
+    }}
+</body>
+</html>
+</form>
 
 
-
+<h1 align = "center"> Applicants </h1>
+<div class="container">
+    <table class="table table-bordered table-fixed">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Academic status</th>
+          <th scope="col">Cumulative GPA</th>
+          <th scope="col">Credit Hours</th>
+          <th scope="col">Semester GPA</th>
+          <th scope="col">Date</th>
+          <th scope="col">Eligibility Status</th>
+          <th scope="col">Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for applicant in applicants %}
+        <tr>
+          <th scope="row">{{applicant.id}}</th>
+          <td>{{applicant.gender}}</td>
+          <td>{{applicant.academicStatus}}</td>
+          <td>{{applicant.cGPA}}</td>
+          <td>{{applicant.creditHrs}}</td>
+          <td>{{applicant.semGPA}}</td>
+          <td>DECEMBER</td>
+          <td>{{applicant.eligibilityStatus}}</td>
+          <td>{{applicant.reason}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
 {% endblock %}
-   <!-- Michaels page to display info from applicants data store-->

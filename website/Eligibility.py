@@ -28,6 +28,8 @@ def eligibilityCheck():
         applicantDob = list(map(int, applicantDob))  # turns the list from str to int
         age = today.year - applicantDob[2] - ((today.month, today.day) < (
         applicantDob[0], applicantDob[1]))  # gets the applicant's age based on today
+
+        applicants[0].reason = ""
         
         if applicants[0].cGPA >= 3.2 and applicants[0].creditHrs >= 12 and age <= 23: #Eligibility rules fulfilled
             applicants[0].eligibilityStatus = "Eligible"
@@ -49,8 +51,9 @@ def eligibilityCheck():
 
                 if applicants[0].creditHrs < 12:
                     applicants[0].reason = f"{applicantReason} \n" + "Does not meet minimum credit hours requirement."
+                    applicantReason = applicants[0].reason
                 if age > 23:
-                    applicants[0].reason = f"{applicantReason} \n" "Does not meet maximum age requirement."
+                    applicants[0].reason = f"{applicantReason} \n" + "Does not meet maximum age requirement."
 
     else:
         for applicant in applicants:
@@ -59,6 +62,8 @@ def eligibilityCheck():
             applicantDob = applicantDob.split('/') #splits the dob into a list where the / is present
             applicantDob = list(map(int, applicantDob)) #turns the list from str to int
             age = today.year - applicantDob[2] - ((today.month, today.day) < (applicantDob[0], applicantDob[1])) #gets the applicant's age based on today
+
+            applicant.reason = ""
 
             if applicant.cGPA >= 3.2 and applicant.creditHrs >= 12 and age <= 23: #Eligibility rules fulfilled
                 applicant.eligibilityStatus = "Eligible"
@@ -80,8 +85,9 @@ def eligibilityCheck():
 
                     if applicant.creditHrs < 12:
                         applicant.reason = f"{applicantReason} \n" + "Does not meet minimum credit hours requirement."
+                        applicantReason = applicant.reason
                     if age > 23:
-                        applicant.reason = f"{applicantReason} \n" "Does not meet maximum age requirement."
+                        applicant.reason = f"{applicantReason} \n" + "Does not meet maximum age requirement."
 
     db.session.commit()
 

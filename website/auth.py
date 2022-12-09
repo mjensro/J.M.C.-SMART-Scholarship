@@ -1,4 +1,5 @@
 #Used to navigate to other pages
+import datetime
 from flask import Blueprint,render_template,request,flash,redirect,url_for
 from .models import Registrar,Applicant,Accounting,Awarded
 from werkzeug.security import generate_password_hash, check_password_hash #might not be needed, currently using to verify email/student id
@@ -80,9 +81,40 @@ def create_application():
                     flash('Data field(s) do not match Registrar Data Store: <ID> – please reenter data', category='error')
                     continue
                 else:
+                    #return redirect(url_for('auth.student'))
+                    break
+
+            if user.creditHrs == 0:
+                flash('Cannot apply', category='error')
+
+            else:
+                applicant = Applicant(id=user.id,
+                                      gender=user.gender,
+                                      academicStatus=user.academicStatus,
+                                      cGPA=user.cGPA,
+                                      creditHrs=user.creditHrs,
+                                      semGPA=user.semGPA,
+                                      date=datetime.datetime.now(),
+                                      eligibilityStatus=None,
+                                      reason=None)
+                applicantCheck = applicant.query.filter_by(id=applicant.id).first()
+
+                if applicantCheck:
+                    flash('Already applied!', category='error')
+
+                else:
+                    db.session.add(applicant)
+                    db.session.commit()
                     flash('Application Submitted', category='success')
-                    return redirect(url_for('auth.student'))
-                    #break                
+
+                    print(applicant.gender, user.fName)
+
+                    return redirect(url_for('auth.student',userFname=user.fName, applicantID=applicant.id, applicantG=applicant.gender,
+                               applicantAS=applicant.academicStatus, applicantCGPA=applicant.cGPA, applicantCHrs=applicant.creditHrs,
+                                applicantSGPA=applicant.semGPA, applicantDate=applicant.date))
+
+    return render_template("appform.html", user=current_user)
+
 
     # new_applicant = Registrar(email=email,fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
     # db.session.add(new_applicant)# add a new user,etc.
@@ -104,15 +136,13 @@ def create_application():
             #pass
     #data = request.form
     #print(data)
-    return render_template("appform.html")
 
 #http://127.0.0.1:5000/student
-@auth.route('/student',methods = ['GET', 'POST', 'UPDATE'])
-def student():#new_applicant):
-    if request.method == 'POST':
-      id = Applicant.request.form.get('ID')
-
-    return render_template("student.html")#, name=new_applicant.fName) #passing name from def
+@auth.route('/student/<applicantID>/<userFname>/<applicantG>/<applicantAS>/<applicantCGPA>/<applicantCHrs>/<applicantSGPA>/<applicantDate>',methods = ['GET','POST'])
+def student(applicantID, userFname, applicantG, applicantAS, applicantCGPA, applicantCHrs, applicantSGPA, applicantDate):#new_applicant):
+    return render_template("student.html", userFname=userFname, applicantID=applicantID, applicantG=applicantG,
+                           applicantAS=applicantAS, applicantCGPA=applicantCGPA, applicantCHrs=applicantCHrs,
+                           applicantSGPA=applicantSGPA, applicantDate=applicantDate)#, name=new_applicant.fName) #passing name from def
     #return "<h1>Welcome {}!</h1>".format(name)
 
 

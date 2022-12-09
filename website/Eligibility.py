@@ -21,7 +21,7 @@ def eligibilityCheck():
     applicants = Applicant.query.order_by(Applicant.id) #Retrieve all applicants
     today = date.today()
     
-    if applicants is not iter: #Check if only one applicant in applicant datastore
+    if not iter(applicants): #Check if only one applicant in applicant datastore
         applicantRegist = Registrar.query.filter_by(id=applicants[0].id).first()  # Used to get dob from registrar
         applicantDob = applicantRegist.dob
         applicantDob = applicantDob.split('/')  # splits the dob into a list where the / is present

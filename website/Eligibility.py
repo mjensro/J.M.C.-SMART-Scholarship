@@ -1,5 +1,5 @@
 #Used to navigate to other pages
-from flask import Blueprint,redirect,url_for
+from flask import Blueprint,redirect,url_for,flash
 from .models import Applicant,Registrar
 from datetime import date
 from . import db
@@ -23,5 +23,6 @@ def eligibilityCheck():
             applicant.eligibilityStatus = "Non-Eligible"
             db.session.commit()
 
+    flash('Finished checking!', category='success')
     return redirect(url_for('cLogin.dashboard'))
 

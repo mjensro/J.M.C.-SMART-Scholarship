@@ -44,7 +44,7 @@ def login():
 @login_required
 def dashboard():
     form = applicantIDForm()
-    applicants = Applicant.query.order_by(Applicant.id)
+    applicants = Applicant.query.order_by(Applicant.eligibilityStatus)
 
     if form.validate_on_submit():
         student = Applicant.query.filter_by(id=form.id.data).first()

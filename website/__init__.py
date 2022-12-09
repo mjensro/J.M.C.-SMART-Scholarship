@@ -34,10 +34,12 @@ def create_app():
     from .views import views
     from .auth import auth
     from .CommitteeLogin import cLogin
+    from .Eligibility import eli
 
     app.register_blueprint(views, url_prefix='/')#prefix states what prefix is needed to 
     app.register_blueprint(auth, url_prefix='/')#registering blueprints
-    app.register_blueprint(cLogin, url_prefix='/')  # registering blueprints
+    app.register_blueprint(cLogin, url_prefix='/')
+    app.register_blueprint(eli, url_prefix='/')# registering blueprints
     
     #from .models import Registrar, Applicant #import other databases
     from . import models

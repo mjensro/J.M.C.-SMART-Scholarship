@@ -45,6 +45,11 @@
     {{ form.hidden_tag() }}
     {{ form.displayAll(class="btn btn-secondary")
     }}
+
+    <a href="{{ url_for('eli.eligibilityCheck')}}"
+    class = "btn btn-success">
+    Check Applicant Eligibility
+    </a>
 </form>
 
 
@@ -88,7 +93,7 @@
                   <td>{{applicant.cGPA}}</td>
                   <td>{{applicant.creditHrs}}</td>
                   <td>{{applicant.semGPA}}</td>
-                  <td>DECEMBER</td>
+                  <td>{{applicant.date}}</td>
                   <td>{{applicant.eligibilityStatus}}</td>
                   <td>{{applicant.reason}}</td>
                 </tr>

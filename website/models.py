@@ -32,7 +32,7 @@ class Applicant(db.Model):
     creditHrs = db.Column(db.Integer)
     semGPA = db.Column(db.Float(5))  # semester GPA
     date = db.Column(db.DateTime(timezone=True),default=func.now) #default = datetime.utcnow)#stores current date&time for application being submitted
-    eligibilityStatus = db.Column(db.String(15), nullable = False)
+    eligibilityStatus = db.Column(db.String(15), nullable = True)
     reason = db.Column(db.String(100), nullable = True)
     #user_id = db.Column(db.Integer, db.ForeignKey('Registrar.id'))
 

@@ -68,7 +68,6 @@ def dashboard():
         if student: #If student exists
 
             #Sends student instead of applicants
-
             return render_template("Committee_dash.html", form=form, applicants=student)
         else: #No Student existing
             flash('No student found!', category='error')

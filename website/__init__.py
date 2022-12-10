@@ -1,3 +1,7 @@
+#     Program name: J.M.C.-SMART-Scholarship
+#     Description: Used to create database blueprint & create database.db if DNE
+#     Author: Michelle Sroka
+#     Date Created: December 7, 2022
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -10,13 +14,11 @@ DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'a'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/StimmyStation/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
     #'sqlite:////C:/flasker/J.M.C.-SMART-Scholarship/website/database.db' for Michelles windows setup
-    #'sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'
+    #'sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db' #for Michelles Mac setup
     #'sqlite:////website/database.db'
-    #'f'sqlite:////{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
-   # db=SQLAlchemy()
     db.init_app(app)
 
     #Login manager for Committee Page
@@ -49,7 +51,7 @@ def create_app():
     return app
 
 def create_database(app):#if database DNE, it creates it, otherwise leave it alone as to not overwrite already existing data
-    if not path.exists('sqlite:////Users/StimmyStation/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'): #+ DB_NAME):
+    if not path.exists('sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-Scholarship/website/database.db'): #+ DB_NAME):
         with app.app_context():
             db.create_all()
             print('Created New Database!')

@@ -1,3 +1,6 @@
+#     Program name: J.M.C.-SMART-Scholarship
+#     Description: Used as a route to the landing page
+#     Author: Michelle Sroka
 #Main page when entering website
 from flask import Blueprint,render_template
 

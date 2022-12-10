@@ -7,7 +7,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from . import db
 
 auth = Blueprint('auth',__name__) #blueprint for flask
-@auth.route('/create-student', methods = ['GET', 'POST', 'UPDATE'])
+"""@auth.route('/create-student', methods = ['GET', 'POST', 'UPDATE']) #Test page for creation of student records, acts as a "sign-up" page
 def create_student():
     if request.method == 'POST':
         id = request.form.get('ID')
@@ -32,7 +32,7 @@ def create_student():
             flash('Account Created!', category='success')
             return redirect(url_for('views.home')) #change routing page
 
-    return render_template("sign_up.html", user=current_user)
+    return render_template("sign_up.html", user=current_user)"""
 
 
 @auth.route('/create-application', methods = ['GET', 'POST', 'UPDATE'])
@@ -68,7 +68,7 @@ def create_application():
                     db.session.commit()
                     flash('Phone Number has been updated', category='success')
                     break
-                    #return redirect(url_for('auth.student'))
+                    #return redirect(url_for('views.home'))
                 elif user.email!=email:
                     flash('<Email> does not match Registrar Data Store. Updating to new value...', category='warning') 
                     user.email = request.form['email']
@@ -76,7 +76,7 @@ def create_application():
                     db.session.commit()
                     flash('Email has been updated', category='success')
                     break
-                    #return redirect(url_for('auth.student'))
+                    #return redirect(url_for('views.home'))
                 elif user.id!=id:
                     flash('Data field(s) do not match Registrar Data Store: <ID> – please reenter data', category='error')
                     continue
@@ -114,28 +114,6 @@ def create_application():
                     #return redirect(url_for('auth.student'))
                     break
     return render_template("appform.html", user=current_user)
-
-
-    # new_applicant = Registrar(email=email,fName=fName,lName=lName,pNum=pNum,zip=zip,dob=dob,id=id)
-    # db.session.add(new_applicant)# add a new user,etc.
-    #  db.session.commit() #commit changes to db, update file
-
-    #   return redirect(url_for('auth.student'))#'views.home' = forward to next page with student GPA,etc. from Applicant Database
-
-       #if no Student Number match:
-       #  flash('No Student Number Match – please reenter data', category = 'error')
-       #elif Student Number matches but one or more of the fields: First Name, Last Name, Zip Code, and Date of Birth do not match “Registrar Data Store” report back an
-            #flash('Data field(s) do not match Registrar Data Store: <list the one or more mismatched data field names> – please reenter data', category ='error')
-       #elif Student Number, First Name, Last Name, Zip Code, Date of Birth do match “Registrar Data Store” but Phone Number and/or Email Address do not match – report back a message 
-        #"<non-matching data field(s)> do not match Registrar Data Store. Update to new value(s) (y/n)?”
-        #If “y” …. Update fields are report message “Fields updated” Continue with next step.
-        #If “n” …. Report message “Please reenter the data”. Repeat edits.
-        #else:
-            #add student to database
-            #flash('Application Accepted',category='success')
-            #pass
-    #data = request.form
-    #print(data)
 
 #http://127.0.0.1:5000/student
 @auth.route('/student/<applicantID>/<userFname>/<applicantG>/<applicantAS>/<applicantCGPA>/<applicantCHrs>/<applicantSGPA>/<applicantDate>',methods = ['GET','POST'])

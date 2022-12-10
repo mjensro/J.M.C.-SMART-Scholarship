@@ -36,7 +36,7 @@ def login():
     form = loginForm()
 
     if form.validate_on_submit(): #Check for user in user datastore
-        user = User.query.filter_by().first()
+        user = User.query.filter_by(userName=form.userName.data).first()
 
         if user: #User exists
             if check_password_hash(user.passwordHash, form.passWord.data): #Checking if password hashes match

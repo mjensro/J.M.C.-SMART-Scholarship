@@ -20,7 +20,6 @@ class Registrar(db.Model, UserMixin):
     cGPA = db.Column(db.Float(5))  # cumulative GPA
     creditHrs = db.Column(db.Integer)
     semGPA = db.Column(db.Float(5))  # semester GPA
-    #notes = db.relationship('Applicant')
 #can prepopulate all data
 
 #Applicant data store
@@ -35,12 +34,6 @@ class Applicant(db.Model):
     eligibilityStatus = db.Column(db.String(15), nullable = True)
     reason = db.Column(db.String(100), nullable = True)
     #user_id = db.Column(db.Integer, db.ForeignKey('Registrar.id'))
-
-    #create string
- #   def __repr__(self):
-#        return '<Name %r>' % self.name
-#can prepopulate some data
-
 
 #class Accounting
 #The committee also requests the tuition amount paid by the student at the beginning of the semester from the “Accounting Data Store” (Student Number and Tuition from latest semester)

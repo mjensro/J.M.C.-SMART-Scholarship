@@ -6,9 +6,10 @@ Michelle Sroka & Michael Faustino
 
                                                      Operating Environment
 Programming Language: Python
+
 Compiler: Visual Studio Code: https://code.visualstudio.com/ (with SQLite extension: SQLite - Visual Studio Marketplace)
 
-Operating system: Windows or Mac
+Operating system: Windows or Mac (Linux not tested)
 
 Additional Modules Required: 
 

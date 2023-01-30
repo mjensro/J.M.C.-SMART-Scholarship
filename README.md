@@ -4,7 +4,7 @@ Fall 2022
 
 Michelle Sroka & Michael Faustino
 
-                                                     Operating Environment
+                                                     	Operating Environment
 Programming Language: Python
 
 Compiler: Visual Studio Code: https://code.visualstudio.com/ (with SQLite extension: SQLite - Visual Studio Marketplace)
@@ -21,7 +21,7 @@ Flask-SQLAlchemy: https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/ ; Combi
 
 Flask-WTF: https://flask-wtf.readthedocs.io/en/1.0.x/ ; Ability to handle form parts of the website to validate login
 
-                                                       File Directory
+                                                       	File Directory
     J.M.C-SMART-SCHOLARSHIP - Main Folder holding all required contents
 
 	‘Website’ Folder           -Stores all HTML, Javascript, and backend files
@@ -57,7 +57,7 @@ Flask-WTF: https://flask-wtf.readthedocs.io/en/1.0.x/ ; Ability to handle form p
 
 	Committee_Login.py -Handles the login of committee members and their dashboard
   
-                                                    Summary Checklist
+                                                    	Summary Checklist
 -Install Python on the preferred operating system
 
 -Install Visual Studio Code 

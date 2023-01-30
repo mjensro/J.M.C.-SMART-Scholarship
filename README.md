@@ -3,7 +3,7 @@
 Fall 2022
 
 Michelle Sroka & Michael Faustino
-
+___________________________________________________________________________________________________________________________________________________________
                                                     Operating Environment
 Programming Language: Python
 
@@ -20,6 +20,7 @@ Flask-Login: https://flask-login.readthedocs.io/en/latest/ ; Verify correct user
 Flask-SQLAlchemy: https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/ ; Combines SQL tables with Python & Flask
 
 Flask-WTF: https://flask-wtf.readthedocs.io/en/1.0.x/ ; Ability to handle form parts of the website to validate login
+___________________________________________________________________________________________________________________________________________________________
 
                                                     File Directory
     J.M.C-SMART-SCHOLARSHIP - Main Folder holding all required contents
@@ -56,8 +57,9 @@ Flask-WTF: https://flask-wtf.readthedocs.io/en/1.0.x/ ; Ability to handle form p
 	Eligibility.py -Handles the eligibility checking and stores them in the applicant database as eligible or non-eligible. non-eligible applicants will be stored with a reason
 
 	Committee_Login.py -Handles the login of committee members and their dashboard
-  
-                                                    Summary Checklist
+___________________________________________________________________________________________________________________________________________________________
+						    
+						   	 Summary Checklist
 -Install Python on the preferred operating system
 
 -Install Visual Studio Code 

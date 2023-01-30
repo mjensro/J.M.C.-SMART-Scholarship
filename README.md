@@ -2,9 +2,7 @@
 
 Fall 2022
 
-Michelle Sroka
-
-Michael Faustino
+Michelle Sroka & Michael Faustino
 
                                                      Operating Environment
 Programming Language: Python

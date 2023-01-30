@@ -1,5 +1,4 @@
 # J.M.C.-SMART-Scholarship
-Created by Team MAM 
 
 Fall 2022
 

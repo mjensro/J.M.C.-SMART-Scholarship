@@ -3,21 +3,17 @@ Created by Team MAM Fall 2022
 Michelle Sroka
 Michael Faustino
 
-                                                          Operating Environment
+                                                     Operating Environment
 Programming Language: Python
 Compiler: Visual Studio Code: https://code.visualstudio.com/ (with SQLite extension: SQLite - Visual Studio Marketplace)
 Operating system: Windows or Mac
 Additional Modules Required: 
-Flask: https://flask.palletsprojects.com/en/2.2.x/ 
-Used to develop a functioning front end with a python backend
-Flask-Login: https://flask-login.readthedocs.io/en/latest/
-(may not be needed)
-Flask-SQLAlchemy: https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/
-Adds the ability to combine SQL with Python & Flask
-Flask-WTF: https://flask-wtf.readthedocs.io/en/1.0.x/
-Ability to handle form parts of the website to validate login
+Flask: https://flask.palletsprojects.com/en/2.2.x/ ; Used to develop a functioning front end with a python backend
+Flask-Login: https://flask-login.readthedocs.io/en/latest/ ; Verify correct usernames and passwords are entered
+Flask-SQLAlchemy: https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/ ; Combines SQL tables with Python & Flask
+Flask-WTF: https://flask-wtf.readthedocs.io/en/1.0.x/ ; Ability to handle form parts of the website to validate login
 
-                                                            File Directory
+                                                       File Directory
 J.M.C-SMART-SCHOLARSHIP - Main Folder holding all required contents
 ‘Website’ Folder            -Stores all HTML, Javascript, and backend files
 ‘Templates’ Folder 	   -Holds all HTML documents within the Website folder
@@ -35,18 +31,13 @@ and 35: if not path.exists('sqlite:////Users/msro/Documents/GitHub/J.M.C.-SMART-
 To match the path of wherever your database.db is located on your personal machine, and include ’sqlite:////’ prior to the directory.
 Model.py - Outlines the SQL columns associated with all the needed 
       tables for the program
-Auth.py  -Used to combine python with website elements, and route data entries so they 
-    can be used in comparison statements, etc.
+Auth.py  -Used to combine python with website elements, and route data entries so they can be used in comparison statements, etc.
 Views.py -Home page Blueprint
-Main.py   -Used to launch the program. Once all libraries are installed correctly, it should 
-     give you a link to the following: http://127.0.0.1:5000 when running
-That you should be able to insert into any browser and view like a normal 
-website.
-Eligibility.py -Handles the eligibility checking and stores them in the applicant database 
-       as eligible or non-eligible. non-eligible applicants will be stored with a reason
+Main.py   -Used to launch the program. Once all libraries are installed correctly, it should give you a link to the following: http://127.0.0.1:5000 while running you should be able to insert into any browser and view like a normal website.
+Eligibility.py -Handles the eligibility checking and stores them in the applicant database as eligible or non-eligible. non-eligible applicants will be stored with a reason
 Committee_Login.py -Handles the login of committee members and their dashboard
   
-                                                         Summary Checklist
+                                                    Summary Checklist
 -Install Python on the preferred operating system
 -Install Visual Studio Code 
 -Make sure that your VS Code is linked to your preferred python version
